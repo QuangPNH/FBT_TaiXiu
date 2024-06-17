@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.prm392_taixiufbt.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_sport"
+        android:name="com.example.prm392_taixiufbt.ui.sport.SportFragment"
+        android:label="@string/title_sport"
+        tools:layout="@layout/fragment_sport" />
+
+    <fragment
+        android:id="@+id/navigation_shop"
+        android:name="com.example.prm392_taixiufbt.ui.shop.ShopFragment"
+        android:label="@string/title_shop"
+        tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/navigation_promo"
+        android:name="com.example.prm392_taixiufbt.ui.promo.PromoFragment"
+        android:label="@string/title_promo"
+        tools:layout="@layout/fragment_promo" />
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.example.prm392_taixiufbt.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account" />
+</navigation>
