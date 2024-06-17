@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
     public void initData(){
+        menuItems.clear();
         menuItems.add(new MenuItems("Nạp Tiền", "ic_payment", 0));
         menuItems.add(new MenuItems("Rút Tiền", "ic_withdrawal", 0));
         menuItems.add(new MenuItems("Thể Thao", "ic_football", 0));
