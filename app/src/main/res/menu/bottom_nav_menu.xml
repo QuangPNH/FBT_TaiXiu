@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_trangchunav"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_sport"
-        android:icon="@drawable/ic_football"
+        android:icon="@drawable/ic_thethaonav"
         android:title="@string/title_sport" />
 
     <item
         android:id="@+id/navigation_shop"
-        android:icon="@drawable/ic_shop"
+        android:icon="@drawable/ic_dailynav"
         android:title="@string/title_shop" />
     <item
         android:id="@+id/navigation_promo"
-        android:icon="@drawable/ic_promo"
+        android:icon="@drawable/ic_khuyenmainav"
         android:title="@string/title_promo" />
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/ic_account"
+        android:icon="@drawable/ic_canhannav"
         android:title="@string/title_account" />
 
 </menu>

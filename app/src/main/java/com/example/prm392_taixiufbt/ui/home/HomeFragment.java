@@ -69,17 +69,19 @@ public class HomeFragment extends Fragment {
     }
     public void initData(){
         menuItems.clear();
-        menuItems.add(new MenuItems("Nạp Tiền", "ic_payment", 0));
-        menuItems.add(new MenuItems("Rút Tiền", "ic_withdrawal", 0));
-        menuItems.add(new MenuItems("Thể Thao", "ic_football", 0));
-        menuItems.add(new MenuItems("Khuyến Mãi", "ic_promo", 0));
-        menuItems.add(new MenuItems("CSKH", "ic_headphone", 0));
-        menuItems.add(new MenuItems("30 Giây", "ic_30", 1));
-        menuItems.add(new MenuItems("60 Giây", "ic_60", 1));
-        menuItems.add(new MenuItems("2 phút", "ic_2m", 1));
-        menuItems.add(new MenuItems("5 phút", "ic_5m", 1));
-        menuItems.add(new MenuItems("10 phút", "ic_10m", 1));
+        menuItems.add(new MenuItems("Nạp Tiền", "ic_naptien", 0));
+        menuItems.add(new MenuItems("Rút Tiền", "ic_ruttien", 0));
+        menuItems.add(new MenuItems("Thể Thao", "ic_thethao", 0));
+        menuItems.add(new MenuItems("Khuyến Mãi", "ic_khuyenmai", 0));
+        menuItems.add(new MenuItems("CSKH", "ic_cskh", 0));
+        menuItems.add(new MenuItems("30 Giây", "ic_30s", 1));
+        menuItems.add(new MenuItems("60 Giây", "ic_60s", 1));
+        menuItems.add(new MenuItems("2 phút", "ic_2p", 1));
+        menuItems.add(new MenuItems("5 phút", "ic_5p", 1));
+        menuItems.add(new MenuItems("10 phút", "ic_10p", 1));
         menuItems.add(new MenuItems("Baccarat", "ic_baccarat", 1));
+        menuItems.add(new MenuItems("Xóc Đĩa", "ic_xocdia", 1));
+        menuItems.add(new MenuItems("Tài Xỉu", "ic_taixiu", 1));
     }
     @Override
     public void onDestroyView() {

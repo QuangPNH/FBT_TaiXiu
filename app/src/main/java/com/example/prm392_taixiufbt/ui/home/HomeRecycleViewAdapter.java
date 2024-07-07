@@ -1,6 +1,7 @@
 package com.example.prm392_taixiufbt.ui.home;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,19 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeRecycleView
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
+        int size = calculateItemSize(context, 3, 16); // Calculate the size for a 3x3 grid with 16px margins
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        layoutParams.width = size;
+        layoutParams.height = size;
+        holder.itemView.setLayoutParams(layoutParams);
+
+        // Set the ImageView size to match the calculated size
+        LinearLayout.LayoutParams imageLayoutParams = new LinearLayout.LayoutParams(size, size);
+        holder.image.setLayoutParams(imageLayoutParams);
+
+        // Load the image resource
         MenuItems menuItem = menuItems.get(position);
         holder.name.setText(menuItem.getName());
 
@@ -45,13 +59,14 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeRecycleView
             // Set a default image or handle the error
         }
 
+
         // Center the item
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams itemLayoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.gravity = Gravity.CENTER;
-        holder.itemView.setLayoutParams(layoutParams);
+        itemLayoutParams.gravity = Gravity.CENTER;
+        holder.itemView.setLayoutParams(itemLayoutParams);
     }
 
     @Override
@@ -68,5 +83,11 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeRecycleView
             name = itemView.findViewById(R.id.p_name);
             image = itemView.findViewById(R.id.p_image);
         }
+    }
+
+    public static int calculateItemSize(Context context, int spanCount, int margins) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float screenWidth = displayMetrics.widthPixels;
+        return (int) ((screenWidth - (margins * (spanCount + 1))) / spanCount);
     }
 }

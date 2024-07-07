@@ -43,7 +43,9 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.material.v140)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }

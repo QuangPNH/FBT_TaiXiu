@@ -10,11 +10,9 @@
         android:id="@+id/m_main_items"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="228dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/m_game_mode"
+        android:layout_marginTop="104dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/m_main_items" />
+        app:layout_constraintTop_toBottomOf="@+id/m_main_items"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/current_events"

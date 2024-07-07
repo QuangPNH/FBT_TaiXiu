@@ -1,6 +1,7 @@
 package com.example.prm392_taixiufbt.ui.home;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,14 @@ public class HomeRecycleViewAdapterForMenu extends RecyclerView.Adapter<HomeRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int size = calculateItemSize(context, 1, 16); // Adjusted for a 5x1 grid with 16px margins
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        layoutParams.height = size; // Adjust height for a horizontal grid
+        holder.itemView.setLayoutParams(layoutParams);
+
+        LinearLayout.LayoutParams imageLayoutParams = new LinearLayout.LayoutParams(size, size);
+        holder.image.setLayoutParams(imageLayoutParams);
+
         MenuItems menuItem = menuItems.get(position);
         holder.name.setText(menuItem.getName());
 
@@ -45,13 +54,14 @@ public class HomeRecycleViewAdapterForMenu extends RecyclerView.Adapter<HomeRecy
             // Set a default image or handle the error
         }
 
+
         // Center the item
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams itemLayoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.gravity = Gravity.CENTER;
-        holder.itemView.setLayoutParams(layoutParams);
+        itemLayoutParams.gravity = Gravity.CENTER;
+        holder.itemView.setLayoutParams(itemLayoutParams);
     }
 
     @Override
@@ -69,4 +79,12 @@ public class HomeRecycleViewAdapterForMenu extends RecyclerView.Adapter<HomeRecy
             image = itemView.findViewById(R.id.p_image);
         }
     }
+
+    public static int calculateItemSize(Context context, int spanCount, int margins) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float screenHeight = displayMetrics.heightPixels;
+        // Adjusting for a horizontal grid (5x1)
+        return (int) ((screenHeight - (margins * (spanCount + 1))) / spanCount);
+    }
+
 }
