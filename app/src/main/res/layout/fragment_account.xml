@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,17 +5,51 @@
     android:layout_height="match_parent"
     tools:context=".ui.account.AccountFragment">
 
+    <ImageView
+        android:id="@+id/userAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
     <TextView
-        android:id="@+id/text_account"
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        app:layout_constraintTop_toBottomOf="@id/userAvatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/menuContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/userName"
+        android:layout_marginTop="32dp">
+
+        <Button
+            android:id="@+id/changeInfoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đổi thông tin người dùng"/>
+
+        <Button
+            android:id="@+id/supportButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chăm sóc khách hàng"/>
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng xuất"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

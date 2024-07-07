@@ -25,4 +25,6 @@
     <string name="title_5p">5 Phút</string>
     <string name="title_10p">10 Phút</string>
     <string name="title_baccarat">Baccarat</string>
+    <string name="title_change_info" >Đổi thông tin người dùng</string>
+    <string name="title_support">Chăm sóc khách hàng</string>
 </resources>

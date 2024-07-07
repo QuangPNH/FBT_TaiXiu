@@ -2,6 +2,7 @@ package com.example.prm392_taixiufbt.ui.home;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,32 +37,31 @@ public class HomeRecycleViewAdapterForMenu extends RecyclerView.Adapter<HomeRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int size = calculateItemSize(context, 1, 16); // Adjusted for a 5x1 grid with 16px margins
-        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        layoutParams.height = size; // Adjust height for a horizontal grid
-        holder.itemView.setLayoutParams(layoutParams);
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int screenWidth = displayMetrics.widthPixels;
+        int itemWidth = screenWidth / 5; // For 5 items per row
+        // Adjust for any margins or padding as necessary
+        itemWidth -= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, displayMetrics); // Adjust padding/margin as needed
 
-        LinearLayout.LayoutParams imageLayoutParams = new LinearLayout.LayoutParams(size, size);
+        // Set the size of the ImageView
+        ViewGroup.LayoutParams imageLayoutParams = holder.image.getLayoutParams();
+        imageLayoutParams.width = itemWidth;
+        imageLayoutParams.height = itemWidth; // Adjust if you want a different height
         holder.image.setLayoutParams(imageLayoutParams);
 
+        // Adjust the text size dynamically based on item width
+        float textSize = itemWidth / 10f; // Adjust formula as needed for your design
+        holder.name.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
+        // Bind your data to the itemView here
         MenuItems menuItem = menuItems.get(position);
         holder.name.setText(menuItem.getName());
-
-        int imageResource = context.getResources().getIdentifier(menuItem.getImage(),"drawable",context.getPackageName());
+        int imageResource = context.getResources().getIdentifier(menuItem.getImage(), "drawable", context.getPackageName());
         if (imageResource != 0) { // Resource exists
             holder.image.setImageResource(imageResource);
         } else {
             // Set a default image or handle the error
         }
-
-
-        // Center the item
-        LinearLayout.LayoutParams itemLayoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        itemLayoutParams.gravity = Gravity.CENTER;
-        holder.itemView.setLayoutParams(itemLayoutParams);
     }
 
     @Override

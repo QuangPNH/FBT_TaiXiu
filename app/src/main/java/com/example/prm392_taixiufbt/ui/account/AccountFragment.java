@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.prm392_taixiufbt.R;
 import com.example.prm392_taixiufbt.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
@@ -18,14 +17,22 @@ public class AccountFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AccountViewModel AccountViewModel =
-                new ViewModelProvider(this).get(AccountViewModel.class);
-
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAccount;
-        AccountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // Set up listeners for your buttons
+        binding.changeInfoButton.setOnClickListener(v ->
+                NavHostFragment.findNavController(AccountFragment.this)
+                        .navigate(R.id.change_info));
+
+        binding.supportButton.setOnClickListener(v ->
+                NavHostFragment.findNavController(AccountFragment.this)
+                        .navigate(R.id.support_page));
+
+        binding.logoutButton.setOnClickListener(v -> {
+            // Handle logout logic here
+        });
+
         return root;
     }
 

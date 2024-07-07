@@ -2,6 +2,7 @@ package com.example.prm392_taixiufbt.ui.home;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,37 +37,32 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeRecycleView
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int screenWidth = displayMetrics.widthPixels;
+        int itemWidth = screenWidth / 3; // For 3 items per row
+        // Adjust for any margins or padding as necessary
+        itemWidth -= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, displayMetrics); // Example padding adjustment
 
-
-        int size = calculateItemSize(context, 3, 16); // Calculate the size for a 3x3 grid with 16px margins
-        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        layoutParams.width = size;
-        layoutParams.height = size;
-        holder.itemView.setLayoutParams(layoutParams);
-
-        // Set the ImageView size to match the calculated size
-        LinearLayout.LayoutParams imageLayoutParams = new LinearLayout.LayoutParams(size, size);
+        // Set the size of the ImageView
+        ViewGroup.LayoutParams imageLayoutParams = holder.image.getLayoutParams();
+        imageLayoutParams.width = itemWidth;
+        imageLayoutParams.height = itemWidth; // Assuming square items for a uniform grid
         holder.image.setLayoutParams(imageLayoutParams);
 
-        // Load the image resource
+        // Adjust the text size dynamically based on item width
+        // This is a simplistic approach; you may need to adjust the formula based on your design
+        float textSize = itemWidth / 10f; // Example formula to adjust text size
+        holder.name.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
+        // Bind your data to the itemView here
         MenuItems menuItem = menuItems.get(position);
         holder.name.setText(menuItem.getName());
-
         int imageResource = context.getResources().getIdentifier(menuItem.getImage(),"drawable",context.getPackageName());
         if (imageResource != 0) { // Resource exists
             holder.image.setImageResource(imageResource);
         } else {
             // Set a default image or handle the error
         }
-
-
-        // Center the item
-        LinearLayout.LayoutParams itemLayoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        itemLayoutParams.gravity = Gravity.CENTER;
-        holder.itemView.setLayoutParams(itemLayoutParams);
     }
 
     @Override

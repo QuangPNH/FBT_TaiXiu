@@ -32,4 +32,14 @@
         android:name="com.example.prm392_taixiufbt.ui.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/change_info"
+        android:name="com.example.prm392_taixiufbt.ui.account.ChangeInfoFragment"
+        android:label="@string/title_change_info"
+        tools:layout="@layout/fragment_changeinfo" />
+    <fragment
+        android:id="@+id/support_page"
+        android:name="com.example.prm392_taixiufbt.ui.account.SupportFragment"
+        android:label="@string/title_support"
+        tools:layout="@layout/fragment_support" />
 </navigation>
