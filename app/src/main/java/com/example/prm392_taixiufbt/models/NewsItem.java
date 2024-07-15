@@ -1,13 +1,29 @@
 package com.example.prm392_taixiufbt.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class NewsItem {
+    @PrimaryKey
     public int id;
+    @ColumnInfo(name = "title")
     public String title;
+    @ColumnInfo(name = "description")
     public String description;
+
+    @Ignore
+    @ColumnInfo(name = "image_url")
     public String imageUrl;
+    @ColumnInfo(name = "content")
     public String content;
+    @ColumnInfo(name = "author")
     public String author;
+    @ColumnInfo(name = "date")
     public String date;
+    @ColumnInfo(name = "type_id")
     public int typeId;
 
     public NewsItem() {

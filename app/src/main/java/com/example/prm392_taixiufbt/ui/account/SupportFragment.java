@@ -31,8 +31,8 @@ public class SupportFragment extends Fragment {
         LinearLayout qaLinearLayout = root.findViewById(R.id.qaLinearLayout);
 
         // Example Q&A items
-        qaItems.add(new QAItem("Question 1", "Answer 1"));
-        qaItems.add(new QAItem("Question 2", "Answer 2"));
+        qaItems.add(new QAItem(1,"Question 1", "Answer 1"));
+        qaItems.add(new QAItem(2,"Question 2", "Answer 2"));
         // Add more items as needed
 
         for (QAItem item : qaItems) {

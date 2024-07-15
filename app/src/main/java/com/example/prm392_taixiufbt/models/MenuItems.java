@@ -1,9 +1,9 @@
 package com.example.prm392_taixiufbt.models;
 
 public class MenuItems {
-    private String name;
-    private String image;
-    private int category;
+    public String name;
+    public String image;
+    public int category;
     //1 is GameMode
     //0 is MainFeatures
 

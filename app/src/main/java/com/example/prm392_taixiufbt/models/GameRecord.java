@@ -1,16 +1,31 @@
 package com.example.prm392_taixiufbt.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.sql.Date;
 import java.time.LocalDateTime;
-
+@Entity
 public class GameRecord {
+    @PrimaryKey
     public int id;
+
+    @ColumnInfo(name = "userId")
     public int userId;
+    @ColumnInfo(name = "gamemode")
     public int gamemode;
+
+    @ColumnInfo(name = "total_earnings")
     public float totalEarnings;
+
+    @ColumnInfo(name = "total_round")
     public int totalRound;
+    @ColumnInfo(name = "total_win")
     public int totalWin;
+    @ColumnInfo(name = "total_lose")
     public int totalLose;
+    @ColumnInfo(name = "played_at")
     public LocalDateTime playedAt;
 
     public GameRecord() {
