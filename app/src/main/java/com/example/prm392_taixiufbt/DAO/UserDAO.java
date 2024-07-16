@@ -40,6 +40,9 @@ public class UserDAO {
         @Query("SELECT * FROM User")
         List<UserWithGameRecord> getUsersWithGameRecord();
 
+        @Query("SELECT * FROM User WHERE username = :username AND password = :password")
+        User findUserByUsernameAndPassword(String username, String password);
+
         @Query("SELECT * FROM GameRecord WHERE userId = :userId")
         List<GameRecord> findGameRecordsByUserId(int userId);
 
