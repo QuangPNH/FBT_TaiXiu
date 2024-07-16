@@ -16,17 +16,23 @@ public class User {
     public String email;
     @ColumnInfo(name = "name")
     public String name;
+    @ColumnInfo(name = "phone")
+    public String phone;
+    @ColumnInfo(name = "typeId")
+    public int typeId;
 
 
     public User() {
     }
 
-    public User(int id, String username, String password, String email, String name) {
+    public User(int id, String username, String password, String email, String name, String phone, int typeId) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.name = name;
+        this.phone = phone;
+        this.typeId = typeId;
     }
 
     public int getId() {

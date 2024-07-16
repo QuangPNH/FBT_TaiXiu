@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.prm392_taixiufbt.DAO.FBTTaiXiuDatabase;
 import com.example.prm392_taixiufbt.DAO.NewsItemDAO;
 import com.example.prm392_taixiufbt.DAO.UserDAO;
+import com.example.prm392_taixiufbt.databinding.ActivityLoginBinding;
 import com.example.prm392_taixiufbt.models.NewsItem;
 import com.example.prm392_taixiufbt.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,7 +26,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
+    private ActivityLoginBinding bindingLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
                 List<NewsItem> newsItems = newsItemDao.getAll();
                 // Initialize User objects with sample data
-                User user1 = new User(1, "user1", "password1", "user1@example.com", "User One");
-                User user2 = new User(2, "user2", "password2", "user2@example.com", "User Two");
-                User user3 = new User(3, "user3", "password3", "user3@example.com", "User Three");
+                User Admin = new User(1, "admin", "admin123", "admin@example.com", "Admin", "0123456789", 1);
+                User user1 = new User(1, "user1", "password1", "user1@example.com", "User One", "0123456789", 0);
+                User user2 = new User(2, "user2", "password2", "user2@example.com", "User Two", "0123456789", 0);
+                User user3 = new User(3, "user3", "password3", "user3@example.com", "User Three", "0123456789", 0);
 
                 // Insert the data
                 userDao.insert(user1);

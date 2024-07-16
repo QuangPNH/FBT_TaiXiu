@@ -1,6 +1,7 @@
 package com.example.prm392_taixiufbt.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -63,8 +64,33 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeRecycleView
         } else {
             // Set a default image or handle the error
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, GameActivity.class);
+                // Assuming countdownTime is determined here, e.g., based on item properties
+                int countdownTime = determineCountdownTime(menuItem);
+                intent.putExtra("countdownTime", countdownTime);
+                context.startActivity(intent);
+            }
+        });
     }
 
+    private int determineCountdownTime(MenuItems item) {
+        if (item.name.equals("30 Giây")){
+            return 30;
+        } else if (item.name.equals("60 Giây")) {
+            return 60;
+        } else if (item.name.equals("2 phút")) {
+            return 120;
+        } else if (item.name.equals("5 phút")) {
+            return 300;
+        } else if (item.name.equals("10 phút")) {
+            return 600;
+        }
+        return 30; // Default or calculated value
+    }
     @Override
     public int getItemCount() {
         return menuItems.size();

@@ -79,9 +79,6 @@ public class HomeFragment extends Fragment {
         menuItems.add(new MenuItems("2 phút", "ic_2p", 1));
         menuItems.add(new MenuItems("5 phút", "ic_5p", 1));
         menuItems.add(new MenuItems("10 phút", "ic_10p", 1));
-        menuItems.add(new MenuItems("Baccarat", "ic_baccarat", 1));
-        menuItems.add(new MenuItems("Xóc Đĩa", "ic_xocdia", 1));
-        menuItems.add(new MenuItems("Tài Xỉu", "ic_taixiu", 1));
     }
     @Override
     public void onDestroyView() {

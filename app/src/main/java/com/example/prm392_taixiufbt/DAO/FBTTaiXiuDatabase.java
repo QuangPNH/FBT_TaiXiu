@@ -18,7 +18,7 @@ import com.example.prm392_taixiufbt.models.User;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, NewsItem.class, QAItem.class, GameRecord.class}, version = 1)
+@Database(entities = {User.class, NewsItem.class, QAItem.class, GameRecord.class}, version = 2)
 @TypeConverters({Converters.class})
 public abstract class FBTTaiXiuDatabase extends RoomDatabase {
     public abstract UserDAO.UserDao userDao();
@@ -35,7 +35,7 @@ public abstract class FBTTaiXiuDatabase extends RoomDatabase {
             synchronized (FBTTaiXiuDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    FBTTaiXiuDatabase.class, "FBT_TaiXiu")
+                                    FBTTaiXiuDatabase.class, "FBT_TaiXiu").fallbackToDestructiveMigration()
                             .build();
                 }
             }
