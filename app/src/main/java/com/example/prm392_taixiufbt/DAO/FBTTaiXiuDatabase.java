@@ -18,7 +18,7 @@ import com.example.prm392_taixiufbt.models.User;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, NewsItem.class, QAItem.class, GameRecord.class}, version = 4)
+@Database(entities = {User.class, NewsItem.class, QAItem.class, GameRecord.class}, version = 5)
 @TypeConverters({Converters.class})
 public abstract class FBTTaiXiuDatabase extends RoomDatabase {
     public abstract UserDAO.UserDao userDao();

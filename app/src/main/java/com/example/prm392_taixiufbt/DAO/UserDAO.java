@@ -50,6 +50,12 @@ public class UserDAO {
         @Query("DELETE FROM user WHERE id = :userId")
         void deleteUserById(int userId);
 
+        @Query("SELECT money FROM User WHERE username = :username")
+        int getUserMoney(String username);
+
+        @Query("UPDATE User SET money = :newMoney WHERE username = :username")
+        void updateUserMoney(String username, int newMoney);
+
     }
 
 }

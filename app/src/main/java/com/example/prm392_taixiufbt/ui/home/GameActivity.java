@@ -1,25 +1,31 @@
 package com.example.prm392_taixiufbt.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.content.SharedPreferences;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.prm392_taixiufbt.DAO.FBTTaiXiuDatabase;
+import com.example.prm392_taixiufbt.LoginActivity;
 import com.example.prm392_taixiufbt.R;
 
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GameActivity extends AppCompatActivity {
-
+    private String thisUsername;
     private int playerMoney = 1000;
     private EditText etBetAmount;
     private TextView tvMoney, tvResult, tvCountdown, tvDice1, tvDice2, tvDice3, tvTaiBetAmount, tvXiuBetAmount;
@@ -27,18 +33,53 @@ public class GameActivity extends AppCompatActivity {
     private Random random;
     private Handler handler;
     private Runnable gameRunnable;
-    private int countdownTime = 30;  // 30 seconds countdown
+    public int countdownTime = 30;
+    public int currentCountdown=0;
     private boolean canBet = true;
     private boolean betPlaced = false;
     private boolean isTaiBet = false;
     private final int MIN_BET_AMOUNT = 2;
     private int betAmount = 0;
 
+
+    private String getCurrentUsername() {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        return sharedPreferences.getString("Username", null); // Returns null if "Username" doesn't exist
+    }
+    private void fetchUserMoneyAndUpdateUI(String username) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+
+
+        executor.execute(() -> {
+            // Assuming you have a method getDatabase() that returns the instance of your Room database
+            FBTTaiXiuDatabase db = FBTTaiXiuDatabase.getDatabase(getApplicationContext());
+            int money = db.userDao().getUserMoney(username);
+
+            handler.post(() -> {
+                // Update the UI thread with the fetched money
+                playerMoney = money;
+                updateMoneyText();
+            });
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        String currentUsername = getCurrentUsername();
+        thisUsername = currentUsername;
+        if (currentUsername != null) {
+            fetchUserMoneyAndUpdateUI(currentUsername);
+        } else {
+            if (currentUsername == null) {
+                Intent intent = new Intent(GameActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish(); // Close GameActivity
+            }
+        }
         countdownTime = getIntent().getIntExtra("countdownTime", 30);
+        currentCountdown = countdownTime;
         etBetAmount = findViewById(R.id.etBetAmount);
         tvMoney = findViewById(R.id.tvMoney);
         tvResult = findViewById(R.id.tvResult);
@@ -144,7 +185,7 @@ public class GameActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000);
                 } else {
                     playGame();
-                    countdownTime = 30;
+                    countdownTime = currentCountdown;
                     canBet = true;
                     handler.postDelayed(this, 1000);
                 }
@@ -166,9 +207,11 @@ public class GameActivity extends AppCompatActivity {
 
             if (isWin) {
                 playerMoney += betAmount;
+                updateUserMoney(thisUsername, playerMoney);
                 tvResult.setText("Kết quả: " + total + " - Bạn đã thắng!");
             } else {
                 playerMoney -= betAmount;
+                updateUserMoney(thisUsername, playerMoney);
                 tvResult.setText("Kết quả: " + total + " - Bạn đã thua.");
             }
 
@@ -181,7 +224,24 @@ public class GameActivity extends AppCompatActivity {
             tvResult.setText("Không có cược nào được đặt.");
         }
     }
+    private void updateUserMoney(String username, int newMoney) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
 
+        executor.execute(() -> {
+            // Get the database instance
+            FBTTaiXiuDatabase db = FBTTaiXiuDatabase.getDatabase(getApplicationContext());
+            // Update the user's money
+            db.userDao().updateUserMoney(username, newMoney);
+
+            handler.post(() -> {
+                // Optionally, update the UI or notify the user of the update
+                Toast.makeText(GameActivity.this, "Money updated successfully", Toast.LENGTH_SHORT).show();
+                // Update the displayed money amount
+                updateMoneyText();
+            });
+        });
+    }
     private void updateMoneyText() {
         tvMoney.setText("Số tiền còn lại: " + playerMoney + "$");
     }

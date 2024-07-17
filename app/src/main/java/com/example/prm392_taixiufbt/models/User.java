@@ -21,13 +21,13 @@ public class User {
     @ColumnInfo(name = "typeId")
     public int typeId;
     @ColumnInfo(name = "money")
-    public float money;
+    public int money;
 
 
     public User() {
     }
 
-    public User(int id, String username, String password, String email, String name, String phone, int typeId,float money) {
+    public User(int id, String username, String password, String email, String name, String phone, int typeId,int money) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -36,6 +36,18 @@ public class User {
         this.phone = phone;
         this.typeId = typeId;
         this.money = money;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public int getId() {
