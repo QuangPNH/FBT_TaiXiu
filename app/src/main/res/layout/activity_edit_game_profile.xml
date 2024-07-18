@@ -1,0 +1,119 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll1Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Roll 1 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleInputLayout" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll2Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Roll 2 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll1Switch" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll3Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 3 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll2Switch" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll4Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 4 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll3Switch" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll5Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 5 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll4Switch" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll6Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 6 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll5Switch" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll7Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 7 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll6Switch" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll8Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 8 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll7Switch" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll9Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 9 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll8Switch" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/roll10Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll 10 Rate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll9Switch" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roll10Switch"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/gameProfileCurrentId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="99dp"
+        android:text="@string/currentGPid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleInputLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

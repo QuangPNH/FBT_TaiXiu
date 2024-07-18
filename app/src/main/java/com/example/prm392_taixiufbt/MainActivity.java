@@ -1,7 +1,9 @@
 package com.example.prm392_taixiufbt;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import com.example.prm392_taixiufbt.DAO.FBTTaiXiuDatabase;
 import com.example.prm392_taixiufbt.DAO.NewsItemDAO;
@@ -41,7 +43,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
+        // Hide navigation_shop if userType is 0
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        int userType = sharedPreferences.getInt("UserType", -1); // Default to -1 if not found
+        if (userType == 0) {
+            Menu navMenu = navView.getMenu();
+            navMenu.findItem(R.id.navigation_shop).setVisible(false);
+        }
 
 
     }

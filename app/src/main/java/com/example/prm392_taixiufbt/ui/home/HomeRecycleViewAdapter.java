@@ -2,21 +2,22 @@ package com.example.prm392_taixiufbt.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392_taixiufbt.R;
+import com.example.prm392_taixiufbt.models.GameProfile;
 import com.example.prm392_taixiufbt.models.MenuItems;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -69,9 +70,17 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeRecycleView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, GameActivity.class);
-                // Assuming countdownTime is determined here, e.g., based on item properties
-                int countdownTime = determineCountdownTime(menuItem);
+                int countdownTime = determineCountdownTime(menuItems.get(position));
                 intent.putExtra("countdownTime", countdownTime);
+
+                // Retrieve the current GameProfile from SharedPreferences
+                SharedPreferences sharedPreferences = context.getSharedPreferences("GameProfilePrefs", Context.MODE_PRIVATE);
+                String gameProfileJson = sharedPreferences.getString("currentGameProfile", "");
+                if (!gameProfileJson.isEmpty()) {
+                    GameProfile currentGameProfile = new Gson().fromJson(gameProfileJson, GameProfile.class);
+                    intent.putExtra("currentGameProfile", currentGameProfile);
+                }
+
                 context.startActivity(intent);
             }
         });

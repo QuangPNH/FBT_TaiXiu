@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.prm392_taixiufbt.DAO.FBTTaiXiuDatabase;
 import com.example.prm392_taixiufbt.LoginActivity;
 import com.example.prm392_taixiufbt.R;
+import com.example.prm392_taixiufbt.models.GameProfile;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -40,7 +41,23 @@ public class GameActivity extends AppCompatActivity {
     private boolean isTaiBet = false;
     private final int MIN_BET_AMOUNT = 2;
     private int betAmount = 0;
+    private GameProfile gameProfile;
+    boolean[] actualResults = new boolean[10];
+    private int actualResultsIndex = 0;
 
+    private void loadActualResults(){
+        actualResults[0] = gameProfile.isRoll1Rate();
+        actualResults[1] = gameProfile.isRoll2Rate();
+        actualResults[2] = gameProfile.isRoll3Rate();
+        actualResults[3] = gameProfile.isRoll4Rate();
+        actualResults[4] = gameProfile.isRoll5Rate();
+        actualResults[5] = gameProfile.isRoll6Rate();
+        actualResults[6] = gameProfile.isRoll7Rate();
+        actualResults[7] = gameProfile.isRoll8Rate();
+        actualResults[8] = gameProfile.isRoll9Rate();
+        actualResults[9] = gameProfile.isRoll10Rate();
+
+    }
 
     private String getCurrentUsername() {
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
@@ -66,6 +83,15 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Extract GameProfile from Intent
+        gameProfile = (GameProfile) getIntent().getSerializableExtra("currentGameProfile");
+        if (gameProfile != null) {
+            // Now that gameProfile is not null, it's safe to call loadActualResults
+            loadActualResults();
+        } else {
+            // Handle case where GameProfile is not passed or found
+            // Consider finishing the activity or showing an error message
+        }
         setContentView(R.layout.activity_game);
         String currentUsername = getCurrentUsername();
         thisUsername = currentUsername;
@@ -184,22 +210,72 @@ public class GameActivity extends AppCompatActivity {
                     tvCountdown.setText("Thời gian còn lại: " + countdownTime + "s");
                     handler.postDelayed(this, 1000);
                 } else {
-                    playGame();
+                    playGame(actualResults[actualResultsIndex]);
+                    if (actualResultsIndex == 9){
+                        actualResultsIndex = 0;
+                    }else {
+                        actualResultsIndex++;
+                    }
                     countdownTime = currentCountdown;
                     canBet = true;
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 5000);
                 }
             }
         };
         handler.post(gameRunnable);
     }
 
-    private void playGame() {
+
+    private int[] taiToXiu(int dice1,int dice2,int dice3, int total){
+        int[] result = new int[4];
+        if(total >= 11){
+            int diff = total - 10;
+            int max = total -3;
+            int numberToLost = random.ints(diff, max).findFirst().getAsInt();
+            int newTotal = total - numberToLost;
+            int firstNumber = random.nextInt(Math.min(6, newTotal - 2)) + 1;
+            int secondNumber = random.nextInt(Math.min(6, newTotal - firstNumber - 1)) + 1;
+            int thirdNumber = total - firstNumber - secondNumber;
+            return new int[]{firstNumber,secondNumber,thirdNumber,newTotal};
+        }
+        return new int[]{dice1,dice2,dice3,total};
+    }
+
+    private int[] xiuToTai(int dice1,int dice2,int dice3, int total){
+        int[] result = new int[4];
+        if(total <= 10){
+            int diff = 11 - total;
+            int max = 18- total;
+            int numberToAdd = random.ints(diff, max).findFirst().getAsInt();
+            int newTotal = total + numberToAdd;
+            int firstNumber = random.nextInt(Math.min(6, newTotal - 2)) + 1;
+            int secondNumber = random.nextInt(Math.min(6, newTotal - firstNumber - 1)) + 1;
+            int thirdNumber = total - firstNumber - secondNumber;
+            return new int[]{firstNumber,secondNumber,thirdNumber,newTotal};
+        }
+        return new int[]{dice1,dice2,dice3,total};
+    }
+    private void playGame(boolean results) {
         if (betPlaced) {
             int dice1 = random.nextInt(6) + 1;
             int dice2 = random.nextInt(6) + 1;
             int dice3 = random.nextInt(6) + 1;
             int total = dice1 + dice2 + dice3;
+
+            if(results == true){
+                int[] newResult = taiToXiu(dice1,dice2,dice3,total);
+                dice1 = newResult[0];
+                dice2 = newResult[1];
+                dice3 = newResult[2];
+                total = newResult[3];
+            }else {
+                int[] newResult = xiuToTai(dice1,dice2,dice3,total);
+                dice1 = newResult[0];
+                dice2 = newResult[1];
+                dice3 = newResult[2];
+                total = newResult[3];
+            }
+
             tvDice1.setText("Xúc xắc 1: " + dice1);
             tvDice2.setText("Xúc xắc 2: " + dice2);
             tvDice3.setText("Xúc xắc 3: " + dice3);

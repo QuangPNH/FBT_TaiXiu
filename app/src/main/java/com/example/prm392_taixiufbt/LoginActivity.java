@@ -14,11 +14,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.prm392_taixiufbt.DAO.FBTTaiXiuDatabase;
+import com.example.prm392_taixiufbt.DAO.GameProfileDAO;
 import com.example.prm392_taixiufbt.DAO.NewsItemDAO;
 import com.example.prm392_taixiufbt.DAO.UserDAO;
+import com.example.prm392_taixiufbt.models.GameProfile;
 import com.example.prm392_taixiufbt.models.NewsItem;
 import com.example.prm392_taixiufbt.models.User;
-
+import com.example.prm392_taixiufbt.RegisterActivity;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
-
+    private Button registerButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -73,6 +75,20 @@ public class LoginActivity extends AppCompatActivity {
                 userDao.insert(user3);
                 userDao.insert(Admin);
 
+
+                GameProfileDAO.GameProfileDao gameProfileDao = db.gameProfileDao();
+                // Initialize GameProfile objects with sample data
+                GameProfile defaultProfile = new GameProfile(1, "Default", true, true, false, true, false, true, true, false, true, false, true);
+                GameProfile profile1 = new GameProfile(2, "Profile 1", true, false, true, false, true, false, true, false, true, false, false);
+                GameProfile profile2 = new GameProfile(3, "Profile 2", false, true, false, true, false, true, false, true, false, true, false);
+                // Insert the data
+
+                gameProfileDao.insert(defaultProfile);
+                gameProfileDao.insert(profile1);
+                gameProfileDao.insert(profile2);
+
+                // Add more insertions here
+
                 // Log success
                 Log.d("DatabaseInsert", "Sample data inserted successfully");
             } catch (Exception e) {
@@ -94,6 +110,14 @@ public class LoginActivity extends AppCompatActivity {
                 checkLogin();
             }
         });
+        registerButton = findViewById(R.id.register);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void checkLoginInBackground(final String username, final String password) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -109,7 +133,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     // Login success
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    saveLoginInfo(username); // Save login info and proceed to MainActivity
+                    saveLoginInfo(username);
+                    saveUserType(user.getTypeId());// Save login info and proceed to MainActivity
                 } else {
                     // Login failed
                     Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
@@ -132,5 +157,12 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         checkLoginInBackground(username, password);
+    }
+    // In LoginActivity or wherever the login logic is successful
+    private void saveUserType(int typeId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("UserType", typeId);
+        editor.apply();
     }
 }

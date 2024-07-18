@@ -40,4 +40,19 @@
     <string name="password">Password</string>
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
+    <string name="usernameField">"Current Username: %1$s"</string>
+    <string name="moneyField">"Current money: %1$d"</string>
+    <string name="currentId">%1$d</string>
+    <string name="fullnameField">Full Name:%1$s</string>
+    <string name="fullname_hint">Enter Fullname</string>
+    <string name="username_hint">Enter username\n</string>
+    <string name="password_hint">Enter password</string>
+    <string name="email_hint">Enter email</string>
+    <string name="phone_hint">Enter phone</string>
+    <string name="register_button_text">REGISTER</string>
+    <string name="currentMoney">%1$d</string>
+    <string name="curentRole">%1$d</string>
+    <string name="selected_game_profile">"Selected Game Profile: %1$s"</string>
+    <string name="active_game_profile">"Active game profile: %1$s"</string>
+    <string name="currentGPid">%1$d</string>
 </resources>

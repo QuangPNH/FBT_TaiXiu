@@ -2,6 +2,7 @@ package com.example.prm392_taixiufbt.DAO;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -55,7 +56,11 @@ public class UserDAO {
 
         @Query("UPDATE User SET money = :newMoney WHERE username = :username")
         void updateUserMoney(String username, int newMoney);
+        @Query("SELECT * FROM User WHERE username = :username")
+        User findUserByUsername(String username);
 
+        @Query("SELECT COUNT(*) FROM User")
+        LiveData<Integer> getCount();
     }
 
 }

@@ -16,40 +16,65 @@
         android:layout_marginTop="32dp"/>
 
     <TextView
+        android:id="@+id/fullName"
+        android:layout_width="296dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fullnameField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAvatar" />
+
+    <TextView
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name"
-        app:layout_constraintTop_toBottomOf="@id/userAvatar"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:text="@string/usernameField"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAvatar" />
+
+    <TextView
+        android:id="@+id/totalMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="@string/moneyField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userAvatar" />
 
     <LinearLayout
         android:id="@+id/menuContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="408dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="344dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userName"
-        android:layout_marginTop="32dp">
+        tools:layout_editor_absoluteX="1dp">
 
         <Button
             android:id="@+id/changeInfoButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đổi thông tin người dùng"/>
+            android:text="Đổi thông tin người dùng" />
 
         <Button
             android:id="@+id/supportButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chăm sóc khách hàng"/>
+            android:text="Chăm sóc khách hàng" />
 
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đăng xuất"/>
+            android:text="Đăng xuất" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,11 +69,11 @@ public class HomeFragment extends Fragment {
     }
     public void initData(){
         menuItems.clear();
-        menuItems.add(new MenuItems("Nạp Tiền", "ic_naptien", 0));
-        menuItems.add(new MenuItems("Rút Tiền", "ic_ruttien", 0));
-        menuItems.add(new MenuItems("Thể Thao", "ic_thethao", 0));
-        menuItems.add(new MenuItems("Khuyến Mãi", "ic_khuyenmai", 0));
-        menuItems.add(new MenuItems("CSKH", "ic_cskh", 0));
+        //menuItems.add(new MenuItems("Nạp Tiền", "ic_naptien", 0));
+        //menuItems.add(new MenuItems("Rút Tiền", "ic_ruttien", 0));
+        //menuItems.add(new MenuItems("Thể Thao", "ic_thethao", 0));
+        //menuItems.add(new MenuItems("Khuyến Mãi", "ic_khuyenmai", 0));
+        //menuItems.add(new MenuItems("CSKH", "ic_cskh", 0));
         menuItems.add(new MenuItems("30 Giây", "ic_30s", 1));
         menuItems.add(new MenuItems("60 Giây", "ic_60s", 1));
         menuItems.add(new MenuItems("2 phút", "ic_2p", 1));
